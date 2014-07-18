@@ -123,6 +123,9 @@ nnoremap <C-y> <C-r>
 inoremap <C-y> <ESC><C-r>i
 vnoremap <C-y> <ESC><C-r>
 
+"CTRL+g: Go to definition/declaration
+map <C-G> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
