@@ -38,6 +38,7 @@ set nobackup												"No backup files
 set noswapfile												"No swap files
 set backspace=2												"Restore backspace functionality
 filetype plugin indent on									"Turn on filetype detection, filetype dependent plugins, filetype dependent indentation
+set clipboard+=unnamed										"Use the system clipboard instead of buffer
 
 "Indentation
 set tabstop=4												"Tab is 4 spaces
