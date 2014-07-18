@@ -154,13 +154,14 @@ let g:syntastic_c_auto_refresh_includes = 1					"Refresh c includes at every sav
 let NERDCommentWholeLinesInVMode=1							"Comment whole lines instead of just the selected part
 "C,C++ comments should be //
 let g:NERDCustomDelimiters = {
-		\ 'c': { 'left': '//' },
-		\ 'cpp': { 'left': '//' }
-	\ }
+			\ 'c': { 'left': '//' },
+			\ 'cpp': { 'left': '//' }
+			\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"NERDComment config
+"YouCompleteMe config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:clang_library_path='/usr/lib/llvm-3.4/lib'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
 
