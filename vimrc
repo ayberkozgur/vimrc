@@ -39,6 +39,9 @@ set noswapfile												"No swap files
 set backspace=2												"Restore backspace functionality
 filetype plugin indent on									"Turn on filetype detection, filetype dependent plugins, filetype dependent indentation
 set clipboard+=unnamed										"Use the system clipboard instead of buffer
+set foldmethod=syntax										"Use folding based on file syntax
+autocmd BufWinLeave *.* mkview								"Save folds when closing window
+autocmd BufWinEnter *.* silent loadview 					"Load folds when opening window
 
 "Indentation
 set tabstop=4												"Tab is 4 spaces
@@ -131,6 +134,11 @@ map <C-G> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 "CTRL+d: Add doxygen block to whatever is under the cursor
 nnoremap <C-d> :Dox<CR>
 inoremap <C-d> <ESC>:Dox<CR>
+
+"Right click to expand/collapse fold
+nnoremap <RightMouse> za
+vnoremap <RightMouse> <ESC>za
+inoremap <RightMouse> <ESC>za
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree config
