@@ -57,6 +57,7 @@ nnoremap <F3> :nohl<CR>
 
 "F4: Autoindent all
 nnoremap <F4> gg=G<C-o><C-o>
+inoremap <F4> <ESC>gg=G<C-o><C-o>
 
 "CTRL+s: Save
 noremap <C-s> :update<CR>
@@ -127,6 +128,10 @@ vnoremap <C-y> <ESC><C-r>
 "CTRL+g: Go to definition/declaration
 map <C-G> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 
+"CTRL+d: Add doxygen block to whatever is under the cursor
+nnoremap <C-d> :Dox<CR>
+inoremap <C-d> <ESC>:Dox<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,15 +146,6 @@ set encoding=utf-8											"Set encoding to utf-8
 set laststatus=2											"Show 2-tall statusbar always
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim		"Enable powerline
 let g:Powerline_symbols = "fancy"							"Enable fancy symbols in powerline
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Syntastic config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:syntastic_cpp_check_header = 1						"Check c++ includes
-let g:syntastic_c_check_header = 1							"Check c includes
-let g:syntastic_cpp_auto_refresh_includes = 1				"Refresh c++ includes at every save
-let g:syntastic_c_auto_refresh_includes = 1					"Refresh c includes at every save
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDComment config
@@ -168,4 +164,19 @@ let g:NERDCustomDelimiters = {
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Headerguard & doxygen config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Add headerguards and doxygen header to new *.h and *.hpp files
+function! s:c_cpp_header_init()
+	:HeaderguardAdd
+	normal ggO
+	:DoxAuthor
+endfunction
+autocmd BufNewFile *.{h,hpp} call <SID>c_cpp_header_init()
+
+"Add doxygen header to new *.c and *.cpp files
+autocmd BufNewFile *.{c,cpp} :DoxAuthor
 

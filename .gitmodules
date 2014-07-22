@@ -22,3 +22,9 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe.git
+[submodule "bundle/DoxygenToolkit.vim"]
+	path = bundle/DoxygenToolkit.vim
+	url = git@github.com:vim-scripts/DoxygenToolkit.vim.git
+[submodule "bundle/vim-headerguard.git"]
+	path = bundle/vim-headerguard.git
+	url = git@github.com:drmikehenry/vim-headerguard.git
