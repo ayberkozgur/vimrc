@@ -74,9 +74,9 @@ inoremap <C-w> <ESC>:quit<CR>
 noremap <C-t> :tabnew<CR>
 inoremap <C-t> <ESC>:tabnew<CR>
 
-"CTRL+q: Switch between c++ source and header
-noremap <C-q> :AT<CR>
-inoremap <C-q> <ESC>:AT<CR>
+"SHIFT+TAB: Switch between c++ source and header
+noremap <S-Tab> :AT<CR>
+inoremap <S-Tab> <ESC>:AT<CR>
 
 "CTRL+c: Comment/uncomment selected
 vnoremap <C-c> :call NERDComment(1,'toggle')<CR>
@@ -128,8 +128,8 @@ nnoremap <C-y> <C-r>
 inoremap <C-y> <ESC><C-r>i
 vnoremap <C-y> <ESC><C-r>
 
-"CTRL+g: Go to definition/declaration
-map <C-G> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
+"Double left click: Go to definition/declaration
+map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 
 "CTRL+d: Add doxygen block to whatever is under the cursor
 nnoremap <C-d> :Dox<CR>
@@ -160,6 +160,7 @@ let g:Powerline_symbols = "fancy"							"Enable fancy symbols in powerline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let NERDCommentWholeLinesInVMode=1							"Comment whole lines instead of just the selected part
+
 "C,C++ comments should be //
 let g:NERDCustomDelimiters = {
 			\ 'c': { 'left': '//' },
@@ -171,7 +172,17 @@ let g:NERDCustomDelimiters = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
+"let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"UltiSnips config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:UltiSnipsExpandTrigger="<TAB>"						"TAB to expand snippet
+let g:UltiSnipsJumpForwardTrigger="<TAB>"					"TAB to the next placeholder
+let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"				"SHIFT+TAB	to the previous placeholder
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Headerguard & doxygen config
