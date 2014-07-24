@@ -1,9 +1,6 @@
 [submodule "bundle/a.vim"]
 	path = bundle/a.vim
 	url = git@github.com:vim-scripts/a.vim.git
-[submodule "bundle/mustang-vim"]
-	path = bundle/mustang-vim
-	url = git@github.com:croaker/mustang-vim.git
 [submodule "bundle/nercommenter"]
 	path = bundle/nercommenter
 	url = git@github.com:scrooloose/nerdcommenter.git
@@ -40,3 +37,6 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
+[submodule "mustang-vim"]
+	path = bundle/mustang-vim
+	url = git@github.com:ayberkozgur/mustang-vim.git

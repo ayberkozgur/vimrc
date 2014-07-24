@@ -21,9 +21,6 @@ set background=dark											"Dark background option
 set t_Co=256												"Turn on 256 color support
 colorscheme mustang											"Set color scheme to mustang
 
-"Override mustang colors so that tabs/spaces won't stand out
-hi SpecialKey guifg=#808080 guibg=#202020 gui=none ctermfg=236 ctermbg=234
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Functional config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,6 +169,7 @@ inoremap <C-v> <ESC>"*pa
 vnoremap <C-v> "*p
 
 "CTRL+q: Escape
+nnoremap <C-q> <ESC>
 inoremap <C-q> <ESC>
 vnoremap <C-q> <ESC>
 
