@@ -173,6 +173,16 @@ nnoremap <C-q> <ESC>
 inoremap <C-q> <ESC>
 vnoremap <C-q> <ESC>
 
+"F6: Unfold one level from top
+nnoremap <F6> :%foldo<CR>
+inoremap <F6> <ESC>:%foldo<CR>a
+vnoremap <F6> <ESC>:%foldo<CR>
+
+"F7: Fold one level from top
+nnoremap <F7> :%foldc<CR>
+inoremap <F7> <ESC>:%foldc<CR>a
+vnoremap <F7> <ESC>:%foldc<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
