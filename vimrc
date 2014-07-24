@@ -6,26 +6,29 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"vim config
+"Visual config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Visual
 set showcmd													"Show commands on bottom in normal mode
 set number													"Show line numbers
 set showmatch												"Show matching parenthesis
 set hlsearch												"Highlight search terms
 set incsearch												"Show search matches when typing
 set list													"Make whitespace chars visible
-set listchars=tab:»\ ,trail:.,extends:#,nbsp:.				"Chars to display on whitespace chars
-syntax enable												"Turn on colorsl
-set background=dark											"Dark background option for Solarized
+set listchars=tab:»\ ,trail:#,extends:>,nbsp:.				"Chars to display on whitespace chars
+syntax enable												"Turn on colors
+set background=dark											"Dark background option
 set t_Co=256												"Turn on 256 color support
 colorscheme mustang											"Set color scheme to mustang
 
-"Mouse related
-set mouse=a													"Mouse can select by clicking
+"Override mustang colors so that tabs/spaces won't stand out
+hi SpecialKey guifg=#808080 guibg=#202020 gui=none ctermfg=236 ctermbg=234
 
-"Functional
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Functional config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set mouse=a													"Mouse can select by clicking
 set hidden													"Hide buffers instead of closing
 set ignorecase												"Ignore case when searching	
 set smartcase												"Ignore case when all lowercase, don't ignore otherwise
