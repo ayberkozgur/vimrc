@@ -64,10 +64,10 @@ nnoremap <C-f> /
 inoremap <C-f> <ESC>/
 vnoremap <C-f> <ESC>/
 
-"F4: Autoindent all
-nnoremap <F4> gg=G<C-o><C-o>
-inoremap <F4> <ESC>gg=G<C-o><C-o>a
-vnoremap <F4> <ESC>gg=G<C-o><C-o>
+"F4: Autoindent all and clean trailing whitespaces
+nnoremap <F4> gg=G::%s/\s\+$//<CR><C-o><C-o>
+inoremap <F4> <ESC>gg=G:%s/\s\+$//<CR><C-o><C-o>a
+vnoremap <F4> <ESC>gg=G:%s/\s\+$//<CR><C-o><C-o>
 
 "CTRL+s: Save
 nnoremap <C-s> :write<CR>
@@ -265,9 +265,9 @@ let g:load_doxygen_syntax=1
 
 "Returns 1 if current file/buffer is empty, 0 otherwise
 function! FileIsEmpty()
-	if filereadable(expand("%")) && match(readfile(expand("%")),"")
+	if filereadable(expand("%")) && match(readfile(expand("%")),"") "Check file
 		return 1
-	elseif line2byte(line('$') + 1) <= 0
+	elseif line2byte(line('$') + 1) <= 0 "Check buffer, may not be associated with file yet
 		return 1
 	else
 		return 0
@@ -282,6 +282,7 @@ function! s:c_cpp_header_init()
 	:DoxLic
 	normal o
 	:DoxAuthor
+	:%s/\s\+$// "Clean trailing whitespaces
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>c_cpp_header_init()
 
@@ -293,18 +294,19 @@ function! s:c_cpp_header_empty_init()
 endfunction
 autocmd BufRead *.{h,hpp} call <SID>c_cpp_header_empty_init()
 
-"Add GPL and doxygen header to new *.c and *.cpp files. For cpp files, create
-"header too if doesn't exist yet.
+"Add GPL and doxygen header to new *.c files
 function! s:c_source_init()
 	filetype detect
 	:DoxLic
 	normal o
 	:DoxAuthor
+	:%s/\s\+$// "Clean trailing whitespaces
 endfunction
 autocmd BufNewFile *.c call <SID>c_source_init()
 
+"Add GPL and doxygen header to new *.cpp files, create header file too if it doesn't exist yet
 function! s:cpp_source_init()
-	
+
 	"Put license text and file summary
 	filetype detect
 	:DoxLic
@@ -312,12 +314,13 @@ function! s:cpp_source_init()
 	:DoxAuthor
 	normal Go
 
-	"Create header too if one doesn't exist yet (put the include macro too)
+	"Create header
 	let header_filename = expand("%:r") . ".h"
 	let header_filename2 = expand("%:r") . ".hpp"
 	exec "normal A#include\"" . header_filename . "\""
 	normal o
 	normal o
+	:%s/\s\+$// "Clean trailing whitespaces
 	if !filereadable(header_filename) && !filereadable(header_filename2)
 		AT
 		call <SID>c_cpp_header_empty_init()
@@ -325,7 +328,7 @@ function! s:cpp_source_init()
 endfunction
 autocmd BufNewFile *.cpp call <SID>cpp_source_init()
 
-"Treat opened empty *.c and *.cpp files as new files
+"Treat opened empty *.c files as new
 function! s:c_source_empty_init()
 	if FileIsEmpty()
 		call <SID>c_source_init()
@@ -333,6 +336,7 @@ function! s:c_source_empty_init()
 endfunction
 autocmd BufRead *.c call <SID>c_source_empty_init()
 
+"Treat opened empty *.cpp files as new
 function! s:cpp_source_empty_init()
 	if FileIsEmpty()
 		call <SID>cpp_source_init()
