@@ -266,7 +266,7 @@ let g:load_doxygen_syntax=1
 "Returns 1 if current file/buffer is empty, 0 otherwise
 function! FileIsEmpty()
 	if filereadable(expand("%")) && match(readfile(expand("%")),"")
-		return 2
+		return 1
 	elseif line2byte(line('$') + 1) <= 0
 		return 1
 	else
@@ -304,13 +304,20 @@ endfunction
 autocmd BufNewFile *.c call <SID>c_source_init()
 
 function! s:cpp_source_init()
+	
+	"Put license text and file summary
 	filetype detect
 	:DoxLic
 	normal o
 	:DoxAuthor
-	"Create header too if one doesn't exist yet
+	normal Go
+
+	"Create header too if one doesn't exist yet (put the include macro too)
 	let header_filename = expand("%:r") . ".h"
 	let header_filename2 = expand("%:r") . ".hpp"
+	exec "normal A#include\"" . header_filename . "\""
+	normal o
+	normal o
 	if !filereadable(header_filename) && !filereadable(header_filename2)
 		AT
 		call <SID>c_cpp_header_empty_init()
