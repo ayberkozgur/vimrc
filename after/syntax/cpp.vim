@@ -11,14 +11,14 @@ hi def link cppPrivate				cppAccess
 hi def link cppProtected			cppAccess
 
 "Highlight whole class accessor label including the indents for visibility
-syn match	cppPublicLabel			"\s\+public:"
-syn match	cppPrivateLabel			"\s\+private:"
-syn match	cppProtectedLabel		"\s\+protected:"
-syn match	qtSignalsLabel			"\s\+signals:"
-syn match	qtSlotsLabel			"\s\+slots:"
-syn match	qtPublicSlotsLabel		"\s\+public slots:"
-syn match	qtPrivateSlotsLabel		"\s\+private slots:"
-syn match	qtProtectedSlotsLabel	"\s\+protected slots:"
+syn match	cppPublicLabel			"\s*public:"
+syn match	cppPrivateLabel			"\s*private:"
+syn match	cppProtectedLabel		"\s*protected:"
+syn match	qtSignalsLabel			"\s*signals:"
+syn match	qtSlotsLabel			"\s*slots:"
+syn match	qtPublicSlotsLabel		"\s*public slots:"
+syn match	qtPrivateSlotsLabel		"\s*private slots:"
+syn match	qtProtectedSlotsLabel	"\s*protected slots:"
 
 hi def link cppPublicLabel			cppAccessLabels
 hi def link cppPrivateLabel			cppAccessLabels
