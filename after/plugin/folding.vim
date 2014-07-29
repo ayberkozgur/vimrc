@@ -24,7 +24,7 @@ function! SensibleFoldText()
 	"c/c++ source/header
 	if &filetype ==# 'cpp' || &filetype ==# 'c'
 
-		if match(firstline,'/\*\*') >= 0																				"Doxygen block
+		if match(firstline,'^\s*/\*\*') >= 0																				"Doxygen block
 
 			"Try to get @brief line to display, display first nonempty line if
 			"there is no @brief
@@ -40,8 +40,9 @@ function! SensibleFoldText()
 				let infotext = indentation . "/** " . GetFirstNonemptyLine(lines) . " */"
 			endif
 
-		elseif match(firstline,'/\*') >= 0																				"Regular comment block
+		elseif match(firstline,'^\s*/\*') >= 0																				"Regular comment block
 			let infotext = indentation . "/* " . GetFirstNonemptyLine(getline(v:foldstart,v:foldend)) . " */"
+
 		elseif match(firstline,'(.*)') >= 0 																			"Function block
 
 			"Get function name
@@ -57,6 +58,7 @@ function! SensibleFoldText()
 				let functionindicator = functionname . '(...) ++ '
 				let infotext = indentation . strpart(functionindicator . indentation,0,max([strlen(indentation),strlen(functionindicator)])) . substitute(firstline,'^\s*','','')
 			endif
+		
 		else																											"Uninteresting block
 			let infotext = indentation . substitute(firstline,'^\s*','','')
 		endif

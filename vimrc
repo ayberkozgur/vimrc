@@ -43,6 +43,8 @@ set foldmethod=syntax										"Use folding based on file syntax
 autocmd BufWinLeave *.* mkview								"Save folds when closing window
 autocmd BufWinEnter *.* silent loadview 					"Load folds when opening window
 set autochdir												"Current working directory is always the directory of the edited file
+set ttyfast													"Fast terminal connection
+set lazyredraw												"Postpone drawing of the screen
 
 "Indentation
 set tabstop=4												"Tab is 4 spaces
