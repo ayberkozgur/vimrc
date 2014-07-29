@@ -40,13 +40,16 @@ function! SensibleFoldText()
 				let infotext = indentation . "/** " . GetFirstNonemptyLine(lines) . " */"
 			endif
 
-		elseif match(firstline,'^\s*/\*') >= 0																				"Regular comment block
+		elseif match(firstline,'^\s*/\*') >= 0																			"Regular comment block
 			let infotext = indentation . "/* " . GetFirstNonemptyLine(getline(v:foldstart,v:foldend)) . " */"
 
 		elseif match(firstline,'(.*)') >= 0 																			"Function block
 
 			"Get function name
-			let functionname = matchstr(firstline,'\s*[A-Za-z0-9_~]\+\s*(.*)')
+			let functionname = matchstr(firstline,'operator\s*[=+\-*/%!<>&|~^,\[\]]*\s*(.*)') "Check for operator overloads
+			if(functionname ==# '')
+				let functionname = matchstr(firstline,'\s*[A-Za-z0-9_~]\+\s*(.*)')
+			endif
 			let functionname = substitute(functionname,'(.*)','','')	"Get rid of parentheses and arguments
 			let functionname = substitute(functionname,'^\s*','','')	"Get rid of leading whitespace
 			let functionname = substitute(functionname,'\s*$','','')	"Get rid of trailing whitespace
@@ -58,7 +61,10 @@ function! SensibleFoldText()
 				let functionindicator = functionname . '(...) ++ '
 				let infotext = indentation . strpart(functionindicator . indentation,0,max([strlen(indentation),strlen(functionindicator)])) . substitute(firstline,'^\s*','','')
 			endif
-		
+	
+		elseif match(firstline,'^\s*\{\s*$') >= 0																		"Line with single {
+			let infotext = 'asdasdasd'
+
 		else																											"Uninteresting block
 			let infotext = indentation . substitute(firstline,'^\s*','','')
 		endif
