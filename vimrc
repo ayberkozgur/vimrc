@@ -66,9 +66,9 @@ inoremap <C-f> <ESC>/
 vnoremap <C-f> <ESC>/
 
 "F4: Autoindent all and clean trailing whitespaces
-nnoremap <F4> gg=G::%s/\s\+$//<CR><C-o><C-o>
-inoremap <F4> <ESC>gg=G:%s/\s\+$//<CR><C-o><C-o>a
-vnoremap <F4> <ESC>gg=G:%s/\s\+$//<CR><C-o><C-o>
+nnoremap <F4> gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
+inoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>a
+vnoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
 
 "CTRL+s: Save
 nnoremap <C-s> :write<CR>
