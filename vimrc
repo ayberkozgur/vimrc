@@ -32,7 +32,6 @@ set smartcase												"Ignore case when all lowercase, don't ignore otherwise
 set history=1000											"1000 commands/searches remembered
 set undolevels=1000											"1000 undos
 set title													"Set terminal's title
-set visualbell												"Flash screen instead of beep
 set noerrorbells											"Don't beep
 set nobackup												"No backup files
 set noswapfile												"No swap files
