@@ -52,6 +52,7 @@ set copyindent												"Copy the previous indendation on autoindenting
 set shiftwidth=4											"Autoindent 4 spaces
 set shiftround												"Use multiple of shiftwidth when indenting '<','>'
 set smarttab												"Use smart tabs
+set cino=N-s												"Do not indent namespaces in c++ code
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Shortcuts
