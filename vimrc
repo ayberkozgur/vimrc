@@ -58,18 +58,67 @@ set cino=N-s												"Do not indent namespaces in c++ code
 "Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"F2: Toggle NERDTreeTabs
+nnoremap <F2> :NERDTreeTabsToggle<CR>:wincmd l<CR>
+inoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>a
+vnoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>
+
 "F3: Clear search highlight
 nnoremap <F3> :nohl<CR>
-
-"CTRL+f: Find
-nnoremap <C-f> /
-inoremap <C-f> <ESC>/
-vnoremap <C-f> <ESC>/
 
 "F4: Autoindent all and clean trailing whitespaces
 nnoremap <F4> gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
 inoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>a
 vnoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
+
+"F5: Refresh
+let NERDTreeMapRefresh='<F5>'
+
+"F6: Unfold one level from top
+nnoremap <F6> :%foldo<CR>
+inoremap <F6> <ESC>:%foldo<CR>a
+vnoremap <F6> <ESC>:%foldo<CR>
+
+"F7: Fold one level from top
+nnoremap <F7> :%foldc<CR>
+inoremap <F7> <ESC>:%foldc<CR>a
+vnoremap <F7> <ESC>:%foldc<CR>
+
+"F8: Fold all doxygen comment blocks
+nnoremap <F8> :FoldAllDoxygen<CR>"
+inoremap <F8> <ESC>:FoldAllDoxygen<CR>i"
+vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v"
+
+"CTRL+z: Undo
+nnoremap <C-z> u
+inoremap <C-z> <ESC>ui
+vnoremap <C-z> <ESC>u
+
+"CTRL+y: Redo (the default CTRL+r can also be used)
+nnoremap <C-y> <C-r>
+inoremap <C-y> <ESC><C-r>i
+vnoremap <C-y> <ESC><C-r>
+
+"CTRL-c in visual mode: Copy (yank) to system clipboard
+vnoremap <C-c> "*y
+
+"CTRL-x in visual mode: Cut (just delete) to system clipboard
+vnoremap <C-x> "*d
+
+"CTRL-v: Paste (put) from system clipboard
+nnoremap <C-v> "*P
+inoremap <C-v> <ESC>"*pa
+vnoremap <C-v> "*p
+
+"CTRL+q: Escape
+nnoremap <C-q> <ESC>
+inoremap <C-q> <ESC>
+vnoremap <C-q> <ESC>
+
+"CTRL+f: Find
+nnoremap <C-f> /
+inoremap <C-f> <ESC>/
+vnoremap <C-f> <ESC>/
 
 "CTRL+s: Save
 nnoremap <C-s> :write<CR>
@@ -86,13 +135,17 @@ nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <ESC>:tabnew<CR>
 vnoremap <C-t> <ESC>:tabnew<CR>
 
+"CTRL+d: Add doxygen block to whatever is under the cursor
+nnoremap <C-d> :Dox<CR>
+inoremap <C-d> <ESC>:Dox<CR>
+
+"CTRL+e: Comment/uncomment selected
+vnoremap <C-e> :call NERDComment(1,'toggle')<CR>
+
 "SHIFT+TAB: Switch between c++ source and header
 nnoremap <S-TAB> :AT<CR>
 inoremap <S-TAB> <ESC>:AT<CR>
 vnoremap <S-TAB> <ESC>:AT<CR>
-
-"CTRL+e: Comment/uncomment selected
-vnoremap <C-e> :call NERDComment(1,'toggle')<CR>
 
 "(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode
 nnoremap <C-S-RIGHT> v<C-RIGHT>
@@ -137,65 +190,13 @@ vnoremap <DOWN> <ESC><DOWN>
 nnoremap ı i
 nnoremap İ I
 
-"CTRL+z: Undo
-nnoremap <C-z> u
-inoremap <C-z> <ESC>ui
-vnoremap <C-z> <ESC>u
-
-"CTRL+y: Redo (the default CTRL+r can also be used)
-nnoremap <C-y> <C-r>
-inoremap <C-y> <ESC><C-r>i
-vnoremap <C-y> <ESC><C-r>
-
 "Double left click: Go to definition/declaration
 map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
-
-"CTRL+d: Add doxygen block to whatever is under the cursor
-nnoremap <C-d> :Dox<CR>
-inoremap <C-d> <ESC>:Dox<CR>
 
 "Right click to expand/collapse fold
 nnoremap <RightMouse> za
 vnoremap <RightMouse> <ESC>za
 inoremap <RightMouse> <ESC>za
-
-"CTRL-c in visual mode: Copy (yank) to system clipboard
-vnoremap <C-c> "*y
-
-"CTRL-x in visual mode: Cut (just delete) to system clipboard
-vnoremap <C-x> "*d
-
-"CTRL-v: Paste (put) from system clipboard
-nnoremap <C-v> "*P
-inoremap <C-v> <ESC>"*pa
-vnoremap <C-v> "*p
-
-"CTRL+q: Escape
-nnoremap <C-q> <ESC>
-inoremap <C-q> <ESC>
-vnoremap <C-q> <ESC>
-
-"F6: Unfold one level from top
-nnoremap <F6> :%foldo<CR>
-inoremap <F6> <ESC>:%foldo<CR>a
-vnoremap <F6> <ESC>:%foldo<CR>
-
-"F7: Fold one level from top
-nnoremap <F7> :%foldc<CR>
-inoremap <F7> <ESC>:%foldc<CR>a
-vnoremap <F7> <ESC>:%foldc<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"NERDTree config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"F2: Toggle NERDTreeTabs
-nnoremap <F2> :NERDTreeTabsToggle<CR>:wincmd l<CR>
-inoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>a
-vnoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>
-
-"F5: Refresh
-let NERDTreeMapRefresh='<F5>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Powerline config
