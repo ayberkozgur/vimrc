@@ -40,3 +40,6 @@
 [submodule "mustang-vim"]
 	path = bundle/mustang-vim
 	url = git@github.com:ayberkozgur/mustang-vim.git
+[submodule "bundle/vim-qml"]
+	path = bundle/vim-qml
+	url = git@github.com:peterhoeg/vim-qml.git
