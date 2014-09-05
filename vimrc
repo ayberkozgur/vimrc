@@ -147,7 +147,7 @@ nnoremap <S-TAB> :AT<CR>
 inoremap <S-TAB> <ESC>:AT<CR>
 vnoremap <S-TAB> <ESC>:AT<CR>
 
-"(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode
+"(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode (with movement in visual line instead of real line)
 nnoremap <C-S-RIGHT> v<C-RIGHT>
 inoremap <C-S-RIGHT> <ESC>v<C-RIGHT>
 vnoremap <C-S-RIGHT> <C-RIGHT>
@@ -156,13 +156,13 @@ nnoremap <C-S-LEFT> v<C-LEFT>
 inoremap <C-S-LEFT> <ESC>v<C-LEFT>
 vnoremap <C-S-LEFT> <C-LEFT>
 
-nnoremap <C-S-UP> v<C-UP>
-inoremap <C-S-UP> <ESC>v<C-UP>
-vnoremap <C-S-UP> <C-UP>
+nnoremap <C-S-UP> vk
+inoremap <C-S-UP> <ESC>vk
+vnoremap <C-S-UP> k
 
-nnoremap <C-S-DOWN> v<C-DOWN>
-inoremap <C-S-DOWN> <ESC>v<C-DOWN>
-vnoremap <C-S-DOWN> <C-DOWN>
+nnoremap <C-S-DOWN> vj
+inoremap <C-S-DOWN> <ESC>vj
+vnoremap <C-S-DOWN> j
 
 nnoremap <S-RIGHT> vl
 inoremap <S-RIGHT> <ESC>vl
@@ -172,19 +172,30 @@ nnoremap <S-LEFT> vh
 inoremap <S-LEFT> <ESC>vh
 vnoremap <S-LEFT> h
 
-nnoremap <S-UP> vk
-inoremap <S-UP> <ESC>vk
-vnoremap <S-UP> k
+nnoremap <S-UP> vgk
+inoremap <S-UP> <ESC>vgk
+vnoremap <S-UP> gk
 
-nnoremap <S-DOWN> vj
-inoremap <S-DOWN> <ESC>vj
-vnoremap <S-DOWN> j
+nnoremap <S-DOWN> vgj
+inoremap <S-DOWN> <ESC>vgj
+vnoremap <S-DOWN> gj
 
-"LEFT/RIGHT/UP/DOWN: Exits the visual mode
-vnoremap <RIGHT> <ESC><RIGHT>
-vnoremap <LEFT> <ESC><LEFT>
-vnoremap <UP> <ESC><UP>
-vnoremap <DOWN> <ESC><DOWN>
+"LEFT/RIGHT/UP/DOWN: Exits the visual mode if in it and moves normally (with movement in visible line instead of real line)
+"nnoremap <RIGHT> l "No effect
+"inoremap <RIGHT> l "No effect
+vnoremap <RIGHT> <ESC>l
+
+"nnoremap <LEFT> <LEFT> "No effect
+"inoremap <LEFT> <LEFT> "No effect
+vnoremap <LEFT> <ESC>h
+
+nnoremap <UP> gk
+inoremap <UP> <C-o>gk
+vnoremap <UP> <ESC>gk
+
+nnoremap <DOWN> gj
+inoremap <DOWN> <C-o>gj
+vnoremap <DOWN> <ESC>gj
 
 "ı/İ: INSERT mode
 nnoremap ı i
@@ -225,8 +236,8 @@ let g:NERDCustomDelimiters = {
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_select_completion = ['<C-DOWN>']
+let g:ycm_key_list_previous_completion = ['<C-UP>']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "UltiSnips config
