@@ -37,9 +37,9 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
-[submodule "mustang-vim"]
-	path = bundle/mustang-vim
-	url = git@github.com:ayberkozgur/mustang-vim.git
 [submodule "bundle/vim-qml"]
 	path = bundle/vim-qml
 	url = git@github.com:peterhoeg/vim-qml.git
+[submodule "bundle/vim-colors-solarized"]
+	path = bundle/vim-colors-solarized
+	url = git@github.com:ayberkozgur/vim-colors-solarized.git

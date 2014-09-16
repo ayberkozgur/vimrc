@@ -17,9 +17,10 @@ set incsearch												"Show search matches when typing
 set list													"Make whitespace chars visible
 set listchars=tab:»\ ,trail:#,extends:>,nbsp:.				"Chars to display on whitespace chars
 syntax enable												"Turn on colors
-set background=dark											"Dark background option
+set background=light										"Light background theme
 set t_Co=256												"Turn on 256 color support
-colorscheme mustang											"Set color scheme to mustang
+let g:solarized_termcolors=256								"Turn on 256 color mode fore solarized
+colorscheme solarized										"Set color scheme to solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Functional config
