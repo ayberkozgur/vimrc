@@ -101,10 +101,10 @@ inoremap <C-y> <ESC><C-r>i
 vnoremap <C-y> <ESC><C-r>
 
 "CTRL-c in visual mode: Copy (yank) to system clipboard
-vnoremap <C-c> "*y
+vnoremap <C-c> "+y
 
 "CTRL-x in visual mode: Cut (just delete) to system clipboard
-vnoremap <C-x> "*d
+vnoremap <C-x> "+d
 
 "CTRL-v: Paste (put) from system clipboard
 nnoremap <C-v> "*P
