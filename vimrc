@@ -9,6 +9,7 @@ execute pathogen#infect()
 "Visual config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set cursorline												"Highlight the current line
 set showcmd													"Show commands on bottom in normal mode
 set number													"Show line numbers
 set showmatch												"Show matching parenthesis
@@ -28,7 +29,7 @@ colorscheme solarized										"Set color scheme to solarized
 
 set mouse=a													"Mouse can select by clicking
 set hidden													"Hide buffers instead of closing
-set ignorecase												"Ignore case when searching	
+set ignorecase												"Ignore case when searching
 set smartcase												"Ignore case when all lowercase, don't ignore otherwise
 set history=1000											"1000 commands/searches remembered
 set undolevels=1000											"1000 undos
@@ -58,6 +59,11 @@ set cino=N-s												"Do not indent namespaces in c++ code
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"F1: Vertical split
+nnoremap <F1> :vsplit<CR>
+inoremap <F1> <ESC>:vsplit<CR>
+vnoremap <F1> <ESC>:vsplit<CR>
 
 "F2: Toggle NERDTreeTabs
 nnoremap <F2> :NERDTreeTabsToggle<CR>:wincmd l<CR>
@@ -149,9 +155,9 @@ inoremap <C-a> <ESC>ggvG
 vnoremap <C-a> <ESC>ggvG
 
 "SHIFT+TAB: Switch between c++ source and header
-nnoremap <S-TAB> :AT<CR>
-inoremap <S-TAB> <ESC>:AT<CR>
-vnoremap <S-TAB> <ESC>:AT<CR>
+nnoremap <S-TAB> :AV<CR>
+inoremap <S-TAB> <ESC>:AV<CR>
+vnoremap <S-TAB> <ESC>:AV<CR>
 
 "(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode (with movement in visual line instead of real line)
 nnoremap <C-S-RIGHT> v<C-RIGHT>
@@ -214,6 +220,28 @@ map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 nnoremap <RightMouse> za
 vnoremap <RightMouse> <ESC>za
 inoremap <RightMouse> <ESC>za
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Continuous vsplit mode on single file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"!!!This doesn't work with wrapping, there seems to be no way of using
+"scrollbind with wrapped text
+function! VsplitContinuous()
+	let last_visible_line = line("w$")
+	set scrollbind
+	:vsplit
+
+	"Go to newly split window and disable scrollbind for now
+	exec "wincmd l"
+	set scrollbind!
+
+	"Scroll to the continuation of the left window in the right window
+	exec "normal " . (last_visible_line + 1) . "ggzt"
+
+	set scrollbind
+	exec "wincmd h"
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Powerline config
