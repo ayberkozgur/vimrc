@@ -143,6 +143,11 @@ inoremap <C-d> <ESC>:Dox<CR>
 "CTRL+e: Comment/uncomment selected
 vnoremap <C-e> :call NERDComment(1,'toggle')<CR>
 
+"CTRL+a: Select all
+nnoremap <C-a> ggvG
+inoremap <C-a> <ESC>ggvG
+vnoremap <C-a> <ESC>ggvG
+
 "SHIFT+TAB: Switch between c++ source and header
 nnoremap <S-TAB> :AT<CR>
 inoremap <S-TAB> <ESC>:AT<CR>
