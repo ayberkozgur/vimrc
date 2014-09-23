@@ -237,8 +237,8 @@ let g:NERDCustomDelimiters = {
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "let g:ycm_auto_trigger = 0									"Do not auto-trigger, it's annoying
-let g:ycm_key_list_select_completion = ['<C-DOWN>']
-let g:ycm_key_list_previous_completion = ['<C-UP>']
+let g:ycm_key_list_select_completion = ['<PAGEDOWN>']
+let g:ycm_key_list_previous_completion = ['<PAGEUP>']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "UltiSnips config
