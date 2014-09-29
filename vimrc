@@ -116,7 +116,7 @@ vnoremap <C-x> "+d
 "CTRL-v: Paste (put) from system clipboard
 nnoremap <C-v> "*P
 inoremap <C-v> <ESC>"*pa
-vnoremap <C-v> "*p
+vnoremap <C-v> "_d"*p
 
 "CTRL+q: Escape
 nnoremap <C-q> <ESC>
