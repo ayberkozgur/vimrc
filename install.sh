@@ -1,8 +1,8 @@
 #!/bin/sh
 
 die(){
-	echo "$1"
-	exit 1
+    echo "$1"
+    exit 1
 }
 
 [ -e ~/.vimrc ] && die "You already have a ~/.vimrc. If you want to continue delete it manually."
