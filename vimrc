@@ -156,9 +156,9 @@ inoremap <C-a> <ESC>ggvG
 vnoremap <C-a> <ESC>ggvG
 
 "SHIFT+TAB: Switch between c++ source and header
-nnoremap <S-TAB> :AV<CR>
-inoremap <S-TAB> <ESC>:AV<CR>
-vnoremap <S-TAB> <ESC>:AV<CR>
+nnoremap <S-TAB> :call SensibleSplitSwitch()<CR>
+inoremap <S-TAB> <ESC>:call SensibleSplitSwitch()<CR>
+vnoremap <S-TAB> <ESC>:call SensibleSplitSwitch()<CR>
 
 "(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode (with movement in visual line instead of real line)
 nnoremap <C-S-RIGHT> v<C-RIGHT>
@@ -221,6 +221,20 @@ map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 nnoremap <RightMouse> za
 vnoremap <RightMouse> <ESC>za
 inoremap <RightMouse> <ESC>za
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"a.vim with vsplit where implementation is always on the left
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! SensibleSplitSwitch()
+    let ext = expand('%:e')
+    if ext == 'cpp' || ext == 'cc'
+        :A
+        :AV
+    else
+        :AV
+    end
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Continuous vsplit mode on single file
