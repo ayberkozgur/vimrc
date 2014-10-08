@@ -199,11 +199,11 @@ vnoremap <RIGHT> <ESC>l
 vnoremap <LEFT> <ESC>h
 
 nnoremap <UP> gk
-inoremap <UP> <C-o>gk
+inoremap <UP> <ESC>gk:call JumpOverFold(1)<CR>i
 vnoremap <UP> <ESC>gk
 
 nnoremap <DOWN> gj
-inoremap <DOWN> <C-o>gj
+inoremap <DOWN> <ESC>gj:call JumpOverFold(0)<CR>i
 vnoremap <DOWN> <ESC>gj
 
 "ı/İ: INSERT mode
@@ -215,11 +215,30 @@ map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 
 "Right click to expand/collapse fold
 nnoremap <RightMouse> za
-vnoremap <RightMouse> <ESC>zav
-inoremap <RightMouse> <ESC>zai
+vnoremap <RightMouse> <ESC>za<DOWN>v
+inoremap <RightMouse> <ESC>za<DOWN>i
 
-"autocmd InsertEnter * setlocal foldclose=all
-"autocmd InsertLeave,WinLeave * setlocal foldclose&
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Jump over if folded
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! JumpOverFold(up)
+    if a:up
+        let foldn = foldclosed('.')
+        if foldn == 1           "Fold begins at first line, can't jump over, go back
+            exec 'normal gj'
+        elseif foldn > 0
+            exec 'normal gk'
+        end
+    else
+        let foldn = foldclosedend('.')
+        if foldn == line('$')   "Fold ends at last line, can't jump over, go back
+            exec 'normal gk'
+        elseif foldn > 0
+            exec 'normal gj'
+        end
+    end
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "a.vim with vsplit where implementation is always on the left
