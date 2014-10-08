@@ -97,6 +97,9 @@ nnoremap <F8> :FoldAllDoxygen<CR>"
 inoremap <F8> <ESC>:FoldAllDoxygen<CR>i"
 vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v"
 
+"CTRL-x in normal mode: Go to insert mode
+nnoremap <C-x> i
+
 "CTRL+z: Undo
 nnoremap <C-z> u
 inoremap <C-z> <ESC>ui
@@ -117,11 +120,6 @@ vnoremap <C-x> "+d
 nnoremap <C-v> "*P
 inoremap <C-v> <ESC>"*pa
 vnoremap <C-v> "_d"*p
-
-"CTRL+q: Escape
-nnoremap <C-q> <ESC>
-inoremap <C-q> <ESC>
-vnoremap <C-q> <ESC>
 
 "CTRL+f: Find
 nnoremap <C-f> /
@@ -284,7 +282,7 @@ let g:NERDCustomDelimiters = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"let g:ycm_auto_trigger = 0                                 "Do not auto-trigger, it's annoying
+"let g:ycm_auto_trigger = 0     "We can't disable this yet because file path completion doesn't work without it
 let g:ycm_key_list_select_completion = ['<PAGEDOWN>']
 let g:ycm_key_list_previous_completion = ['<PAGEUP>']
 let g:ycm_confirm_extra_conf = 0
