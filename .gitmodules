@@ -43,3 +43,6 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git@github.com:ayberkozgur/vim-colors-solarized.git
+[submodule "bundle/restore_view"]
+	path = bundle/restore_view
+	url = git@github.com:Konfekt/restore_view.git

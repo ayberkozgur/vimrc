@@ -41,8 +41,6 @@ set backspace=2                                             "Restore backspace f
 filetype plugin indent on                                   "Turn on filetype detection, filetype dependent plugins, filetype dependent indentation
 set clipboard=unnamedplus                                   "Use the system clipboard instead of buffer
 set foldmethod=syntax                                       "Use folding based on file syntax
-autocmd BufWinLeave *.* mkview                              "Save folds when closing window
-autocmd BufWinEnter *.* silent loadview                     "Load folds when opening window
 set autochdir                                               "Current working directory is always the directory of the edited file
 set ttyfast                                                 "Fast terminal connection
 set lazyredraw                                              "Postpone drawing of the screen
@@ -219,6 +217,9 @@ map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 nnoremap <RightMouse> za
 vnoremap <RightMouse> <ESC>zav
 inoremap <RightMouse> <ESC>zai
+
+"autocmd InsertEnter * setlocal foldclose=all
+"autocmd InsertLeave,WinLeave * setlocal foldclose&
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "a.vim with vsplit where implementation is always on the left
