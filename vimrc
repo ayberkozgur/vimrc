@@ -75,9 +75,9 @@ vnoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>
 nnoremap <F3> :nohl<CR>
 
 "F4: Autoindent all and clean trailing whitespaces
-nnoremap <F4> gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
-inoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>a
-vnoremap <F4> <ESC>gg=G:silent! %s/\s\+$//<CR><C-o><C-o>
+nnoremap <F4> :call Cleanup()<CR>
+inoremap <F4> <ESC>:call Cleanup()<CR>a
+vnoremap <F4> <ESC>:call Cleanup()<CR>
 
 "F5: Refresh
 let NERDTreeMapRefresh='<F5>'
@@ -93,9 +93,9 @@ inoremap <F7> <ESC>:%foldc<CR>a
 vnoremap <F7> <ESC>:%foldc<CR>
 
 "F8: Fold all doxygen comment blocks
-nnoremap <F8> :FoldAllDoxygen<CR>"
-inoremap <F8> <ESC>:FoldAllDoxygen<CR>i"
-vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v"
+nnoremap <F8> :FoldAllDoxygen<CR>
+inoremap <F8> <ESC>:FoldAllDoxygen<CR>i
+vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v
 
 "CTRL-x in normal mode: Go to insert mode
 nnoremap <C-x> i
@@ -217,8 +217,8 @@ map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
 
 "Right click to expand/collapse fold
 nnoremap <RightMouse> za
-vnoremap <RightMouse> <ESC>za
-inoremap <RightMouse> <ESC>za
+vnoremap <RightMouse> <ESC>zav
+inoremap <RightMouse> <ESC>zai
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "a.vim with vsplit where implementation is always on the left
@@ -232,6 +232,29 @@ function! SensibleSplitSwitch()
     else
         :AV
     end
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Autoindent+clean
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! Cleanup()
+    "Record where we were
+    exec 'normal ma'
+
+    let topline = line("w0")
+
+    "Autoindent all
+    exec 'normal gg=G'
+
+    "Clean trailing whitespace
+    :silent! %s/\s\+$//
+
+    "Make previous topline current topline
+    exec 'normal ' . topline . 'ggzt'
+
+    "Return to initial cursor position
+    exec 'normal `a'
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
