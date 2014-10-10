@@ -346,7 +346,7 @@ let g:DoxygenToolkit_authorName="Ayberk Özgür"              "Author name to be
 
 "License text
 let g:DoxygenToolkit_licenseTag="\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "Copyright (C) " . strftime("%Y") . " " . g:DoxygenToolkit_authorName . "\<ENTER>"
+let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "Copyright (C) " . strftime("%Y") . " EPFL\<ENTER>"
 let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "\<ENTER>"
 let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "This program is free software: you can redistribute it and/or modify\<ENTER>"
 let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "it under the terms of the GNU General Public License as published by\<ENTER>"
