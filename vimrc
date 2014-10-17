@@ -44,6 +44,9 @@ set foldmethod=syntax                                       "Use folding based o
 set autochdir                                               "Current working directory is always the directory of the edited file
 set ttyfast                                                 "Fast terminal connection
 set lazyredraw                                              "Postpone drawing of the screen
+set wrap                                                    "Soft wrap
+set linebreak                                               "Only break at brk characters
+set brk=\ ^I,;\{\}\(\)                                      "Break at chars that don't disturb c++
 
 "Indentation
 set tabstop=4                                               "Tab is 4 spaces
