@@ -40,7 +40,6 @@ set noswapfile                                              "No swap files
 set backspace=2                                             "Restore backspace functionality
 filetype plugin indent on                                   "Turn on filetype detection, filetype dependent plugins, filetype dependent indentation
 set clipboard=unnamedplus                                   "Use the system clipboard instead of buffer
-set foldmethod=syntax                                       "Use folding based on file syntax
 set autochdir                                               "Current working directory is always the directory of the edited file
 set ttyfast                                                 "Fast terminal connection
 set lazyredraw                                              "Postpone drawing of the screen
@@ -57,6 +56,13 @@ set shiftround                                              "Use multiple of shi
 set smarttab                                                "Use smart tabs
 set expandtab                                               "Use spaces
 set cino=N-s                                                "Do not indent namespaces in c++ code
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Syntax folding: Open all folds in an unseen file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd Syntax c,cpp setlocal foldmethod=syntax
+autocmd Syntax c,cpp normal zR
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Shortcuts
