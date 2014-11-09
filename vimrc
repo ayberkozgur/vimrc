@@ -16,7 +16,7 @@ set showmatch                                               "Show matching paren
 set hlsearch                                                "Highlight search terms
 set incsearch                                               "Show search matches when typing
 set list                                                    "Make whitespace chars visible
-set listchars=tab:»\ ,trail:#,extends:>,nbsp:.              "Chars to display on whitespace chars
+set listchars=tab:>\ ,trail:#,extends:>,nbsp:.              "Chars to display on whitespace chars
 syntax enable                                               "Turn on colors
 set background=light                                        "Light background theme
 set t_Co=256                                                "Turn on 256 color support
