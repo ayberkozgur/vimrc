@@ -104,6 +104,11 @@ nnoremap <F8> :FoldAllDoxygen<CR>
 inoremap <F8> <ESC>:FoldAllDoxygen<CR>i
 vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v
 
+"F9: Hard wrap paragraph to 120 characters
+nnoremap <F9> :setlocal textwidth=120<CR>gqip:setlocal textwidth=0<CR>
+inoremap <F9> <ESC>:setlocal textwidth=120<CR>gqip:setlocal textwidth=0<CR>i
+vnoremap <F9> <ESC>:setlocal textwidth=120<CR>gqip:setlocal textwidth=0<CR>v
+
 "CTRL-x in normal mode: Go to insert mode
 nnoremap <C-x> i
 
