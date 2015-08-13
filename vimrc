@@ -340,7 +340,7 @@ let g:NERDCustomDelimiters = {
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "let g:ycm_auto_trigger = 0     "We can't disable this yet because file path completion doesn't work without it
-let g:ycm_key_list_select_completion = ['<PAGEDOWN>']
+let g:ycm_key_list_select_completion = ['<TAB>']
 let g:ycm_key_list_previous_completion = ['<PAGEUP>']
 let g:ycm_confirm_extra_conf = 0
 
