@@ -56,7 +56,7 @@ set shiftround                                              "Use multiple of shi
 set smarttab                                                "Use smart tabs
 set expandtab                                               "Use spaces
 set cino=N-s                                                "Do not indent namespaces in c++ code
-au BufNewFile,BufRead *.tex set filetype=plaintex           "There is an annoying bug somewhere, syntax doesn't work with tex, works with just plaintex (tex_flavor also doesn't work)
+au BufNewFile,BufRead *.tex set filetype=tex                "There is an annoying bug somewhere, syntax doesn't work with tex, works with just plaintex (tex_flavor also doesn't work)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Syntax folding: Open all folds in an unseen file
