@@ -42,7 +42,7 @@
 	url = git@github.com:ayberkozgur/vim-colors-solarized.git
 [submodule "bundle/restore_view"]
 	path = bundle/restore_view
-	url = git@github.com:Konfekt/restore_view.git
+	url = git@github.com:ayberkozgur/restore_view.git
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = git@github.com:ayberkozgur/vim-snippets.git
