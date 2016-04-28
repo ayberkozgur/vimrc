@@ -1,48 +1,18 @@
-[submodule "bundle/a.vim"]
-	path = bundle/a.vim
-	url = git@github.com:vim-scripts/a.vim.git
-[submodule "bundle/nercommenter"]
-	path = bundle/nerdcommenter
-	url = git@github.com:scrooloose/nerdcommenter.git
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
-[submodule "bundle/powerline"]
-	path = bundle/powerline
-	url = git@github.com:Lokaltog/powerline.git
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = git@github.com:tpope/vim-pathogen.git
 [submodule "bundle/vim-nerdtree-tabs"]
 	path = bundle/vim-nerdtree-tabs
 	url = git@github.com:jistr/vim-nerdtree-tabs.git
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = git@github.com:Valloric/YouCompleteMe.git
-[submodule "bundle/DoxygenToolkit.vim"]
-	path = bundle/DoxygenToolkit.vim
-	url = git@github.com:vim-scripts/DoxygenToolkit.vim.git
-[submodule "bundle/vim-headerguard.git"]
-	path = bundle/vim-headerguard.git
-	url = git@github.com:drmikehenry/vim-headerguard.git
-[submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
-	url = git@github.com:SirVer/ultisnips.git
 [submodule "bundle/tabline.vim"]
 	path = bundle/tabline.vim
 	url = git@github.com:mkitt/tabline.vim.git
-[submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = git@github.com:tpope/vim-fugitive.git
-[submodule "bundle/vim-qml"]
-	path = bundle/vim-qml
-	url = git@github.com:peterhoeg/vim-qml.git
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git@github.com:ayberkozgur/vim-colors-solarized.git
 [submodule "bundle/restore_view"]
 	path = bundle/restore_view
 	url = git@github.com:ayberkozgur/restore_view.git
-[submodule "bundle/vim-snippets"]
-	path = bundle/vim-snippets
-	url = git@github.com:ayberkozgur/vim-snippets.git

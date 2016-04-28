@@ -11,25 +11,6 @@ error_and_die(){
     exit 1
 }
 
-check_deps(){
-    DEPS=$(cat "$SCRIPTPATH/dependencies")
-    REQDEPS=""
-    for DEP in $DEPS
-    do
-        STATUS=$(dpkg-query -W -f=\${Status} 2>&1 "$DEP")
-        if [ "$STATUS" != "install ok installed" ]
-        then
-            REQDEPS="$REQDEPS $DEP"
-        fi
-    done
-    if [ "$REQDEPS" == "" ]
-    then
-        return "0"
-    else
-        error_and_die "$INITCMDERR: Dependencies $REQDEPS not found. Run \`$SCRIPTPATH/install-deps.sh\` to install them."
-    fi
-}
-
 symlink(){
     FROM=$1
     TO=$2
@@ -55,11 +36,6 @@ then
     LNARG="-f"
 fi
 
-#Check dependencies
-echo -e "$INITCMD: Checking dependencies..."
-check_deps || exit 1
-echo -e "$INITCMD: Checking dependencies...done."
-
 cd ~/.vim/
 
 #Get submodules
@@ -71,10 +47,3 @@ echo -e "$INITCMD: Getting plugins...done."
 symlink "$HOME/.vim/vimrc" "$HOME/.vimrc" "$HOME/.dotfiles/vim/vimrc"
 symlink "$HOME/.vim" "$HOME/.nvim" "$HOME/.dotfiles/nvim"
 symlink "$HOME/.vim/vimrc" "$HOME/.nvimrc" "$HOME/dotsfiles/vim/vimrc"
-
-#Build ycm
-echo -e "$INITCMD: Building YouCompleteMe..."
-cd "$HOME/.vim/bundle/YouCompleteMe" || exit 1
-./install.py --clang-completer || error_and_die "$INITCMDERR: Failed to build YouCompleteMe."
-echo -e "$INITCMD: Building YouCompleteMe...done."
-

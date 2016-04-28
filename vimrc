@@ -45,7 +45,6 @@ set ttyfast                                                 "Fast terminal conne
 set lazyredraw                                              "Postpone drawing of the screen
 set wrap                                                    "Soft wrap
 set linebreak                                               "Only break at brk characters
-set brk=\ ^I,;\{\}\(\)                                      "Break at chars that don't disturb c++
 
 "Indentation
 set tabstop=4                                               "Tab is 4 spaces
@@ -55,24 +54,10 @@ set shiftwidth=4                                            "Autoindent 4 spaces
 set shiftround                                              "Use multiple of shiftwidth when indenting '<','>'
 set smarttab                                                "Use smart tabs
 set expandtab                                               "Use spaces
-set cino=N-s                                                "Do not indent namespaces in c++ code
-au BufNewFile,BufRead *.tex set filetype=tex                "There is an annoying bug somewhere, syntax doesn't work with tex, works with just plaintex (tex_flavor also doesn't work)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Syntax folding: Open all folds in an unseen file
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd Syntax c,cpp setlocal foldmethod=syntax
-autocmd Syntax c,cpp normal zR
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"F1: Vertical split
-nnoremap <F1> :vsplit<CR>
-inoremap <F1> <ESC>:vsplit<CR>
-vnoremap <F1> <ESC>:vsplit<CR>
 
 "F2: Toggle NERDTreeTabs
 nnoremap <F2> :NERDTreeTabsToggle<CR>:wincmd l<CR>
@@ -81,11 +66,6 @@ vnoremap <F2> <ESC>:NERDTreeTabsToggle<CR>:wincmd l<CR>
 
 "F3: Clear search highlight
 nnoremap <F3> :nohl<CR>
-
-"F4: Autoindent all and clean trailing whitespaces
-nnoremap <F4> :call Cleanup()<CR>
-inoremap <F4> <ESC>:call Cleanup()<CR>a
-vnoremap <F4> <ESC>:call Cleanup()<CR>
 
 "F5: Refresh
 let NERDTreeMapRefresh='<F5>'
@@ -99,11 +79,6 @@ vnoremap <F6> <ESC>:%foldo<CR>
 nnoremap <F7> :%foldc<CR>
 inoremap <F7> <ESC>:%foldc<CR>a
 vnoremap <F7> <ESC>:%foldc<CR>
-
-"F8: Fold all doxygen comment blocks
-nnoremap <F8> :FoldAllDoxygen<CR>
-inoremap <F8> <ESC>:FoldAllDoxygen<CR>i
-vnoremap <F8> <ESC>:FoldAllDoxygen<CR>v
 
 "F9: Hard wrap paragraph to 120 characters
 nnoremap <F9> :setlocal textwidth=120<CR>gqip:setlocal textwidth=0<CR>
@@ -154,22 +129,10 @@ nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <ESC>:tabnew<CR>
 vnoremap <C-t> <ESC>:tabnew<CR>
 
-"CTRL+d: Add doxygen block to whatever is under the cursor
-nnoremap <C-d> :Dox<CR>
-inoremap <C-d> <ESC>:Dox<CR>
-
-"CTRL+e: Comment/uncomment selected
-vnoremap <C-e> :call NERDComment(1,'toggle')<CR>
-
 "CTRL+a: Select all
 nnoremap <C-a> ggvG
 inoremap <C-a> <ESC>ggvG
 vnoremap <C-a> <ESC>ggvG
-
-"SHIFT+TAB: Switch between c++ source and header
-nnoremap <S-TAB> :call SensibleSplitSwitch()<CR>
-inoremap <S-TAB> <ESC>:call SensibleSplitSwitch()<CR>
-vnoremap <S-TAB> <ESC>:call SensibleSplitSwitch()<CR>
 
 "(CTRL)+SHIFT+LEFT/RIGHT/UP/DOWN: Select text in any mode (with movement in visual line instead of real line)
 nnoremap <C-S-RIGHT> v<C-RIGHT>
@@ -225,95 +188,6 @@ vnoremap <DOWN> <ESC>gj
 nnoremap ı i
 nnoremap İ I
 
-"Double left click: Go to definition/declaration
-map <2-LeftMouse> <ESC> :tab split<CR>:YcmCompleter GoTo<CR>
-
-"Right click to expand/collapse fold
-nnoremap <RightMouse> za
-vnoremap <RightMouse> <ESC>za<DOWN>v
-inoremap <RightMouse> <ESC>za<DOWN>i
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Jump over if folded
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! JumpOverFold(up)
-    if a:up
-        let foldn = foldclosed('.')
-        if foldn == 1           "Fold begins at first line, can't jump over, go back
-            exec 'normal gj'
-        elseif foldn > 0
-            exec 'normal gk'
-        end
-    else
-        let foldn = foldclosedend('.')
-        if foldn == line('$')   "Fold ends at last line, can't jump over, go back
-            exec 'normal gk'
-        elseif foldn > 0
-            exec 'normal gj'
-        end
-    end
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"a.vim with vsplit where implementation is always on the left
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! SensibleSplitSwitch()
-    let ext = expand('%:e')
-    if ext == 'cpp' || ext == 'cc'
-        :A
-        :AV
-    else
-        :AV
-    end
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Autoindent+clean
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! Cleanup()
-    "Record where we were
-    exec 'normal ma'
-
-    let topline = line("w0")
-
-    "Autoindent all
-    exec 'normal gg=G'
-
-    "Clean trailing whitespace
-    :silent! %s/\s\+$//
-
-    "Make previous topline current topline
-    exec 'normal ' . topline . 'ggzt'
-
-    "Return to initial cursor position
-    exec 'normal `a'
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Continuous vsplit mode on single file
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"!!!This doesn't work with wrapping, there seems to be no way of using
-"scrollbind with wrapped text
-function! VsplitContinuous()
-    let last_visible_line = line("w$")
-    set scrollbind
-    :vsplit
-
-    "Go to newly split window and disable scrollbind for now
-    exec "wincmd l"
-    set scrollbind!
-
-    "Scroll to the continuation of the left window in the right window
-    exec "normal " . (last_visible_line + 1) . "ggzt"
-
-    set scrollbind
-    exec "wincmd h"
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Powerline config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -324,151 +198,9 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim     "Enable powerline
 let g:Powerline_symbols = "fancy"                           "Enable fancy symbols in powerline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"NERDComment config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let NERDCommentWholeLinesInVMode=1                          "Comment whole lines instead of just the selected part
-
-"C,C++ comments should be //
-let g:NERDCustomDelimiters = {
-            \ 'c': { 'left': '//' },
-            \ 'cpp': { 'left': '//' }
-            \ }
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"YouCompleteMe config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"let g:ycm_auto_trigger = 0     "We can't disable this yet because file path completion doesn't work without it
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_key_list_previous_completion = ['<PAGEUP>']
-let g:ycm_confirm_extra_conf = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"UltiSnips config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:UltiSnipsExpandTrigger="<TAB>"                        "TAB to expand snippet
-let g:UltiSnipsJumpForwardTrigger="<TAB>"                   "TAB to the next placeholder
-let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"                "SHIFT+TAB  to the previous placeholder
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"DoxygenToolkit config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:DoxygenToolkit_authorName="Ayberk Özgür"              "Author name to be put at @author tags
-
-"License text
-let g:DoxygenToolkit_licenseTag="\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "Copyright (C) " . strftime("%Y") . " EPFL\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "This program is free software: you can redistribute it and/or modify\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "it under the terms of the GNU General Public License as published by\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "the Free Software Foundation, either version 3 of the License, or\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "(at your option) any later version.\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "This program is distributed in the hope that it will be useful,\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "but WITHOUT ANY WARRANTY; without even the implied warranty of\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "GNU General Public License for more details.\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "You should have received a copy of the GNU General Public License\<ENTER>"
-let g:DoxygenToolkit_licenseTag=g:DoxygenToolkit_licenseTag . "along with this program.  If not, see http://www.gnu.org/licenses/."
-
-"Highlight doxygen comments (not part of DoxygenToolkit)
-let g:load_doxygen_syntax=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Creation of new *.c/*.cpp/*.h/*.hpp files
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"Returns 1 if current file/buffer is empty, 0 otherwise
-function! FileIsEmpty()
-    if filereadable(expand("%")) && match(readfile(expand("%")),"") "Check file
-        return 1
-    elseif line2byte(line('$') + 1) <= 0 "Check buffer, may not be associated with file yet
-        return 1
-    else
-        return 0
-    endif
-endfunction
-
-"Add GPL, doxygen header and headerguards to new *.h and *.hpp files
-function! s:c_cpp_header_init()
-    filetype detect
-    :HeaderguardAdd
-    normal ggO
-    :DoxLic
-    normal o
-    :DoxAuthor
-    :%s/\s\+$// "Clean trailing whitespaces
-endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>c_cpp_header_init()
-
-"Treat opened empty *.h and *.hpp files as new files
-function! s:c_cpp_header_empty_init()
-    if FileIsEmpty()
-        call <SID>c_cpp_header_init()
-    endif
-endfunction
-autocmd BufRead *.{h,hpp} call <SID>c_cpp_header_empty_init()
-
-"Add GPL and doxygen header to new *.c files
-function! s:c_source_init()
-    filetype detect
-    :DoxLic
-    normal o
-    :DoxAuthor
-    :%s/\s\+$// "Clean trailing whitespaces
-endfunction
-autocmd BufNewFile *.c call <SID>c_source_init()
-
-"Add GPL and doxygen header to new *.cpp files, create header file too if it doesn't exist yet
-function! s:cpp_source_init()
-
-    "Put license text and file summary
-    filetype detect
-    :DoxLic
-    normal o
-    :DoxAuthor
-    normal Go
-
-    "Create header
-    let header_filename = expand("%:r") . ".h"
-    let header_filename2 = expand("%:r") . ".hpp"
-    exec "normal A#include\"" . header_filename . "\""
-    normal o
-    normal o
-    :%s/\s\+$// "Clean trailing whitespaces
-    if !filereadable(header_filename) && !filereadable(header_filename2)
-        AT
-        call <SID>c_cpp_header_empty_init()
-    endif
-endfunction
-autocmd BufNewFile *.cpp call <SID>cpp_source_init()
-
-"Treat opened empty *.c files as new
-function! s:c_source_empty_init()
-    if FileIsEmpty()
-        call <SID>c_source_init()
-    endif
-endfunction
-autocmd BufRead *.c call <SID>c_source_empty_init()
-
-"Treat opened empty *.cpp files as new
-function! s:cpp_source_empty_init()
-    if FileIsEmpty()
-        call <SID>cpp_source_init()
-    endif
-endfunction
-autocmd BufRead *.cpp call <SID>cpp_source_empty_init()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Tabline color config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 hi TabLine      ctermfg=Black   ctermbg=DarkGrey    cterm=NONE
 hi TabLineFill  ctermfg=Black   ctermbg=DarkGrey    cterm=NONE
 hi TabLineSel   ctermfg=White   ctermbg=Red         cterm=NONE
-
