@@ -177,11 +177,11 @@ vnoremap <RIGHT> <ESC>l
 vnoremap <LEFT> <ESC>h
 
 nnoremap <UP> gk
-inoremap <UP> <ESC>gk:call JumpOverFold(1)<CR>i
+inoremap <UP> <ESC>gki
 vnoremap <UP> <ESC>gk
 
 nnoremap <DOWN> gj
-inoremap <DOWN> <ESC>gj:call JumpOverFold(0)<CR>i
+inoremap <DOWN> <ESC>gji
 vnoremap <DOWN> <ESC>gj
 
 "ı/İ: INSERT mode
